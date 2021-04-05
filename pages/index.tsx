@@ -37,19 +37,27 @@ const App = () => {
           <input
             {...register('value', { required: true })}
             type="text"
-            placeholder="성경과 장과 절을 입력하세요 (Ex 요 3:4-5)"
+            placeholder="성경과 장과 절을 입력하세요 (Ex 요 3:4-5 or 요한복음 3:4-5)"
             className="w-full rounded p-1 border-gray-300 border focus:outline-none focus:ring-1 focus:ring-black focus:ring-opacity-60"
           />
         </form>
       </div>
       <div className="h-full w-full bg-bgColor p-6 relative">
-        {bible && verses && (
+        {bible && verses ? (
           <iframe
             src={`http://ibibles.net/quote.php?${version}-${bible}/${verses}`}
             className="w-full h-full"
           >
             <p>현재 사용 중인 브라우저는 iframe 요소를 지원하지 않습니다!</p>
           </iframe>
+        ) : (
+          <div className="flex items-center flex-col h-full">
+            <h1 className="text-3xl font-semibold py-8">
+              Welcome to Search Bible
+            </h1>
+            <p className="font-medium">You can search bible like 요 1:2-3</p>
+            <p className="font-medium">or like 요한복음 1:2-3</p>
+          </div>
         )}
         <button
           onClick={changeVersion}
