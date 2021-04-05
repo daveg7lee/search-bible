@@ -6,6 +6,7 @@ module.exports = {
       colors: {
         bgColor: '#E0E0E0',
         headerColor: '#F7F6F3',
+        buttonColor: '#2CAADC',
       },
       borderWidth: {
         DEFAULT: '1px',
