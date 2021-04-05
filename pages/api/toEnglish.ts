@@ -1,11 +1,18 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import bibleTable from '../../public/bibleTable';
+import Abbreviation from '../../utils/Abbreviation';
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
   const {
     query: { value },
   } = req;
-  const book: any = value;
+  let book: any = value;
+  if (book in bibleTable) {
+    return res.send({
+      value: bibleTable[book],
+    });
+  }
+  book = Abbreviation(book);
   return res.send({
     value: bibleTable[book],
   });
