@@ -45,7 +45,7 @@ const App = () => {
       <div className="h-full w-full bg-bgColor p-6 relative">
         {bible && verses ? (
           <iframe
-            src={`http://ibibles.net/quote.php?${version}-${bible}/${verses}`}
+            src={`https://ibibles.net/quote.php?${version}-${bible}/${verses}`}
             className="w-full h-full"
           >
             <p>현재 사용 중인 브라우저는 iframe 요소를 지원하지 않습니다!</p>
