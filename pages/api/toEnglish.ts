@@ -8,11 +8,10 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
   } = req;
   let book: any = value;
   if (book in bibleTable) {
-    return res.send({
-      value: bibleTable[book],
-    });
+    book = value;
+  } else {
+    book = Abbreviation(book);
   }
-  book = Abbreviation(book);
   return res.send({
     value: bibleTable[book],
   });

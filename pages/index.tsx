@@ -1,7 +1,9 @@
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import axios from 'axios';
 import Head from 'next/head';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import Loading from '../components/Loading';
 
 const NIV = 'niv';
 const KOR = 'kor';
@@ -10,15 +12,23 @@ const App = () => {
   const { register, handleSubmit } = useForm();
   const [bible, setBible] = useState('');
   const [verses, setVerses] = useState('');
+  const [loading, setLoading] = useState(false);
   const [version, setVersion] = useState(KOR);
   const onSubmit = async (data) => {
-    const { value } = data;
-    const splited = value.split(' ');
-    const koBook = splited[0];
-    const verses = splited[1];
-    const res = await axios(`/api/toEnglish?value=${koBook}`);
-    setBible(res.data.value);
-    setVerses(verses);
+    setLoading(true);
+    try {
+      const { value } = data;
+      const splited = value.split(' ');
+      const koBook = splited[0];
+      const verses = splited[1];
+      const res = await axios(`/api/toEnglish?value=${koBook}`);
+      setBible(res.data.value);
+      setVerses(verses);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
   };
   const changeVersion = () => {
     if (version === KOR) {
@@ -42,30 +52,34 @@ const App = () => {
           />
         </form>
       </div>
-      <div className="h-full w-full bg-bgColor p-6 relative">
-        {bible && verses ? (
-          <iframe
-            src={`https://ibibles.net/quote.php?${version}-${bible}/${verses}`}
-            className="w-full h-full"
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className="h-full w-full bg-bgColor p-6 relative">
+          {bible && verses ? (
+            <iframe
+              src={`https://ibibles.net/quote.php?${version}-${bible}/${verses}`}
+              className="w-full h-full"
+            >
+              <p>현재 사용 중인 브라우저는 iframe 요소를 지원하지 않습니다!</p>
+            </iframe>
+          ) : (
+            <div className="flex items-center flex-col h-full">
+              <h1 className="text-3xl font-semibold py-8">
+                Welcome to Search Bible
+              </h1>
+              <p className="font-medium">You can search bible like 요 1:2-3</p>
+              <p className="font-medium">or like 요한복음 1:2-3</p>
+            </div>
+          )}
+          <button
+            onClick={changeVersion}
+            className="ml-3 bg-buttonColor py-1.5 px-2.5 rounded-full text-white focus:outline-none absolute right-5 bottom-5"
           >
-            <p>현재 사용 중인 브라우저는 iframe 요소를 지원하지 않습니다!</p>
-          </iframe>
-        ) : (
-          <div className="flex items-center flex-col h-full">
-            <h1 className="text-3xl font-semibold py-8">
-              Welcome to Search Bible
-            </h1>
-            <p className="font-medium">You can search bible like 요 1:2-3</p>
-            <p className="font-medium">or like 요한복음 1:2-3</p>
-          </div>
-        )}
-        <button
-          onClick={changeVersion}
-          className="ml-3 bg-buttonColor py-1.5 px-2.5 rounded-full text-white focus:outline-none absolute right-5 bottom-5"
-        >
-          {version === KOR ? 'Change to NIV' : '개역한글로 변경'}
-        </button>
-      </div>
+            {version === KOR ? 'Change to NIV' : '개역한글로 변경'}
+          </button>
+        </div>
+      )}
     </div>
   );
 };
