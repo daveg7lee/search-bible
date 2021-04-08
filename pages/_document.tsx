@@ -9,6 +9,7 @@ class MyDocument extends Document {
             name="google-site-verification"
             content="iVIdX2Zr88cCNMJzRYM-wmA9vVXbKako6kSJigxu2Og"
           />
+          <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
         </Head>
         <body>
           <Main />
