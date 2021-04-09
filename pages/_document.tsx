@@ -7,7 +7,7 @@ class MyDocument extends Document {
         <Head>
           <meta
             name="google-site-verification"
-            content="iVIdX2Zr88cCNMJzRYM-wmA9vVXbKako6kSJigxu2Og"
+            content="ljN2MsEuFIaVZgS0RCKF-iufd7Wn6vVp_ygDmB87VRI"
           />
           <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
         </Head>
