@@ -3,6 +3,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      gridTemplateColumns: {
+        header: '200px minmax(800px, 1fr) 200px',
+      },
       colors: {
         bgColor: '#E0E0E0',
         headerColor: '#F7F6F3',
