@@ -1,4 +1,5 @@
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import Image from 'next/image';
 import axios from 'axios';
 import Head from 'next/head';
 import { useState } from 'react';
@@ -50,12 +51,17 @@ const App = () => {
       <Head>
         <title>Search Bible</title>
       </Head>
-      <div className="w-full bg-headerColor top-0 py-2.5 px-1.5 md:grid md:grid-cols-3 grid-cols-1">
-        <FaBible
-          size={30}
-          className="hidden md:block ml-5 cursor-pointer"
-          onClick={clearState}
-        />
+      <div className="w-full bg-headerColor top-0 py-2.5 px-4 md:grid md:grid-cols-3 grid-cols-1">
+        <div className="w-8 allCenter">
+          <Image
+            src="/bible.png"
+            alt="bible"
+            width={30}
+            height={30}
+            onClick={clearState}
+            className="hidden md:block ml-5 cursor-pointer"
+          />
+        </div>
         <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
           <input
             {...register('value', { required: true })}
