@@ -3,15 +3,12 @@ import axios from 'axios';
 import Head from 'next/head';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/router';
 import Loading from '../components/Loading';
 import { KOR, NIV } from '../public/globalVar';
-import Button from '../components/Button';
 import Welcome from '../components/Welcome';
 import Logo from '../components/Logo';
 
 const App = () => {
-  const router = useRouter();
   const { register, handleSubmit } = useForm();
   const [bible, setBible] = useState('');
   const [verses, setVerses] = useState('');
@@ -34,16 +31,7 @@ const App = () => {
     }
   };
   const changeVersion = () => {
-    if (version === KOR) {
-      setVersion(NIV);
-    } else if (version === NIV) {
-      setVersion(KOR);
-    }
-  };
-  const clearState = () => {
-    setBible('');
-    setVerses('');
-    router.reload();
+    version === KOR ? setVersion(NIV) : setVersion(KOR);
   };
   return (
     <div className="allCenter flex-col h-screen">
@@ -51,7 +39,7 @@ const App = () => {
         <title>Search Bible</title>
       </Head>
       <div className="w-full bg-headerColor top-0 py-2.5 px-7 md:grid md:grid-cols-header grid-cols-1">
-        <Logo clearState={clearState} />
+        <Logo />
         <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
           <input
             {...register('value', { required: true })}
@@ -75,7 +63,12 @@ const App = () => {
                   현재 사용 중인 브라우저는 iframe 요소를 지원하지 않습니다!
                 </p>
               </iframe>
-              <Button changeVersion={changeVersion} />
+              <button
+                onClick={changeVersion}
+                className="ml-3 bg-buttonColor py-1.5 px-2.5 rounded-full text-white focus:outline-none absolute right-5 bottom-5"
+              >
+                {version === KOR ? 'Change to NIV' : '개역한글로 변경'}
+              </button>
             </>
           ) : (
             <Welcome />
