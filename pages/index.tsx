@@ -9,8 +9,10 @@ import Bible from '../components/Bible';
 import Button from '../components/Button';
 import Header from '../components/Header';
 import toEnglish from '../utils/toEnglish';
+import { useRouter } from 'next/router';
 
 const App = () => {
+  const router = useRouter();
   const { register, handleSubmit } = useForm();
   const [loading, setLoading] = useState(false);
   const [version, setVersion] = useState(KOR);
@@ -55,7 +57,7 @@ const App = () => {
       setVerses(splitedVerses);
       setBook(engBook);
     } catch (e) {
-      console.log(e);
+      router.reload();
     }
   };
   // change bible version
