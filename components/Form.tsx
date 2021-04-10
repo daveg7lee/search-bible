@@ -12,7 +12,7 @@ const Form = ({ handleSubmit, onSubmit, register }) => (
       type="submit"
       className="absolute right-1.5 h-7 w-7 rounded allCenter focus:outline-none"
     >
-      <IoSearchSharp />
+      <IoSearchSharp name="Search-icon" />
     </button>
   </form>
 );
