@@ -7,6 +7,7 @@ import Loading from '../components/Loading';
 import { KOR, NIV } from '../public/globalVar';
 import Welcome from '../components/Welcome';
 import Logo from '../components/Logo';
+import Bible from '../components/Bible';
 
 const App = () => {
   const { register, handleSubmit } = useForm();
@@ -55,14 +56,9 @@ const App = () => {
         <div className="h-full w-full bg-bgColor p-6 relative">
           {bible && verses ? (
             <>
-              <iframe
-                src={`https://ibibles.net/quote.php?${version}-${bible}/${verses}`}
-                className="w-full h-full"
-              >
-                <p>
-                  현재 사용 중인 브라우저는 iframe 요소를 지원하지 않습니다!
-                </p>
-              </iframe>
+              <Bible
+                url={`https://ibibles.net/quote.php?${version}-${bible}/${verses}`}
+              />
               <button
                 onClick={changeVersion}
                 className="ml-3 bg-buttonColor py-1.5 px-2.5 rounded-full text-white focus:outline-none absolute right-5 bottom-5"
