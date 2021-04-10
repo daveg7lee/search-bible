@@ -30,7 +30,7 @@ class MyDocument extends Document {
             type="image/png"
             sizes="32x32"
           />
-          <meta name="theme-color" content="#317EFB" />
+          <meta name="theme-color" content="#373C3F" />
         </Head>
         <body>
           <Main />
