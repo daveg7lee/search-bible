@@ -24,5 +24,13 @@ a {
 }
 
 .input {
-  @apply w-full rounded p-1 border-gray-300 border focus:outline-none focus:ring-1 focus:ring-black focus:ring-opacity-60;
+  @apply w-full h-8 rounded p-1 border-gray-300 border focus:outline-none focus:ring-1 focus:ring-black focus:ring-opacity-60;
+}
+
+.darkMode {
+  @apply p-2 h-full rounded focus:outline-none hover:bg-white hover:bg-opacity-20 duration-100 allCenter ml-auto;
+}
+
+.header {
+  @apply w-full bg-headerColor dark:bg-darkHeaderColor top-0 py-2.5 px-7 md:grid md:grid-cols-header grid-cols-1;
 }

@@ -1,11 +1,12 @@
 interface BibleProps {
-  url: string;
+  html: string;
 }
 
-const Bible = ({ url }: BibleProps) => (
-  <iframe src={url} className="w-full h-full">
-    <p>현재 사용 중인 브라우저는 iframe 요소를 지원하지 않습니다!</p>
-  </iframe>
+const Bible = ({ html }: BibleProps) => (
+  <div
+    className="dark:bg-darkBgColor bg-bgColor dark:text-white"
+    dangerouslySetInnerHTML={{ __html: html }}
+  ></div>
 );
 
 export default Bible;

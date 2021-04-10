@@ -1,6 +1,6 @@
 module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
-  darkMode: 'media', // or 'media' or 'class'
+  darkMode: 'class', // or false or 'class'
   theme: {
     extend: {
       gridTemplateColumns: {
@@ -8,7 +8,9 @@ module.exports = {
       },
       colors: {
         bgColor: '#E0E0E0',
+        darkBgColor: '#2F3437',
         headerColor: '#F7F6F3',
+        darkHeaderColor: '#373C3F',
         buttonColor: '#0472B9',
       },
       borderWidth: {

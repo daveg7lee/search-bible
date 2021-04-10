@@ -1,7 +1,9 @@
 import AbbreviationTable from '../public/AbbreviationTable';
 
-export default (book: string) => {
+const Abbreviation = (book: string) => {
   if (book in AbbreviationTable) {
     return AbbreviationTable[book];
   }
 };
+
+export default Abbreviation;

@@ -1,70 +1,85 @@
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import axios from 'axios';
-import Head from 'next/head';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Loading from '../components/Loading';
 import { KOR, NIV } from '../public/globalVar';
 import Welcome from '../components/Welcome';
-import Logo from '../components/Logo';
 import Bible from '../components/Bible';
+import Button from '../components/Button';
+import Header from '../components/Header';
+import toEnglish from '../utils/toEnglish';
+import DarkModeBtn from '../components/DarkModeBtn';
 
 const App = () => {
   const { register, handleSubmit } = useForm();
-  const [bible, setBible] = useState('');
-  const [verses, setVerses] = useState('');
   const [loading, setLoading] = useState(false);
   const [version, setVersion] = useState(KOR);
+  const [HTML, setHTML] = useState(null);
+  const [book, setBook] = useState('');
+  const [verses, setVerses] = useState('');
+  const [dark, setDark] = useState(true);
+  // useEffect for dark mode
+  useEffect(() => {
+    const html = document.querySelector('html');
+    if (dark) {
+      html.className = 'dark';
+    } else {
+      html.className = '';
+    }
+  }, [dark]);
+  // useEffect for edit HTML
+  useEffect(() => {
+    const editHTML = async () => {
+      const {
+        data: { html },
+      } = await axios(
+        `api/getHTML?version=${version}&book=${book}&verses=${verses}`
+      );
+      setLoading(false);
+      setHTML(html);
+    };
+    if (book && verses && verses) {
+      setLoading(true);
+      editHTML();
+    }
+  }, [book, verses, version]);
+  // get data and change verses and book to edit HTML
   const onSubmit = async (data) => {
     setLoading(true);
     try {
       const { value } = data;
-      const splited = value.split(' ');
-      const koBook = splited[0];
-      const verses = splited[1];
-      const res = await axios(`/api/toEnglish?value=${koBook}`);
-      setBible(res.data.value);
-      setVerses(verses);
+      const splitedValue = value.split(' ');
+      const koBook = splitedValue[0];
+      const splitedVerses = splitedValue[1].replace(':', '%3A');
+      const engBook = toEnglish(koBook);
+      setVerses(splitedVerses);
+      setBook(engBook);
     } catch (e) {
       console.log(e);
-    } finally {
-      setLoading(false);
     }
   };
-  const changeVersion = () => {
+  // change bible version
+  const changeVersion = async () => {
     version === KOR ? setVersion(NIV) : setVersion(KOR);
   };
   return (
     <div className="allCenter flex-col h-screen">
-      <Head>
-        <title>Search Bible</title>
-      </Head>
-      <div className="w-full bg-headerColor top-0 py-2.5 px-7 md:grid md:grid-cols-header grid-cols-1">
-        <Logo />
-        <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
-          <input
-            {...register('value', { required: true })}
-            type="text"
-            placeholder="성경과 장과 절을 입력하세요"
-            className="input"
-          />
-        </form>
-      </div>
+      <Header
+        handleSubmit={handleSubmit}
+        onSubmit={onSubmit}
+        register={register}
+        setDark={setDark}
+        dark={dark}
+      />
       {loading ? (
         <Loading />
       ) : (
-        <div className="h-full w-full bg-bgColor p-6 relative">
-          {bible && verses ? (
+        <div className="h-full w-full bg-bgColor dark:bg-darkBgColor p-6 relative">
+          {HTML ? (
             <>
-              <Bible
-                url={`https://ibibles.net/quote.php?${version}-${bible}/${verses}`}
-              />
-              <button
-                onClick={changeVersion}
-                className="ml-3 bg-buttonColor py-1.5 px-2.5 rounded-full text-white focus:outline-none absolute right-5 bottom-5"
-              >
-                {version === KOR ? 'Change to NIV' : '개역한글로 변경'}
-              </button>
+              <Bible html={HTML} />
+              <Button changeVersion={changeVersion} version={version} />
             </>
           ) : (
             <Welcome />
