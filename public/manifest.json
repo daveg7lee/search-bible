@@ -1,7 +1,7 @@
 {
     "theme_color": "#0472B9",
     "background_color": "#2F3437",
-    "display": "browser",
+    "display": "standalone",
     "scope": "/",
     "start_url": "/",
     "name": "Search Bible",
