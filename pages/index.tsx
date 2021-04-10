@@ -75,7 +75,7 @@ const App = () => {
       {loading ? (
         <Loading />
       ) : (
-        <div className="h-full w-full bg-bgColor dark:bg-darkBgColor p-6 relative">
+        <div className="h-full w-full bg-bgColor dark:bg-darkBgColor p-6 relative overflow-y-auto">
           {HTML ? (
             <>
               <Bible html={HTML} />
