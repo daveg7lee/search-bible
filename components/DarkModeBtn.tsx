@@ -1,13 +1,20 @@
-import { FaMoon, FaSun } from 'react-icons/fa';
+import { DarkModeSwitch } from 'react-toggle-dark-mode';
 
-const DarkModeBtn = ({ setDark, dark }) => (
-  <button className="darkMode allCenter" onClick={() => setDark(!dark)}>
-    {dark ? (
-      <FaSun color="white" size={20} />
-    ) : (
-      <FaMoon color="#373C3F" size={20} />
-    )}
-  </button>
-);
+const DarkModeBtn = ({ setDark, dark }) => {
+  const toggleDarkMode = () => {
+    setDark((previous) => !previous);
+  };
+  return (
+    <button className="darkMode allCenter">
+      <DarkModeSwitch
+        checked={!dark}
+        onChange={toggleDarkMode}
+        size={25}
+        moonColor="#2F3437"
+        sunColor="white"
+      />
+    </button>
+  );
+};
 
 export default DarkModeBtn;
