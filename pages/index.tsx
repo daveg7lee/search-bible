@@ -9,7 +9,6 @@ import Bible from '../components/Bible';
 import Button from '../components/Button';
 import Header from '../components/Header';
 import toEnglish from '../utils/toEnglish';
-import DarkModeBtn from '../components/DarkModeBtn';
 
 const App = () => {
   const { register, handleSubmit } = useForm();

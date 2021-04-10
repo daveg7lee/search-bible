@@ -6,6 +6,8 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <title>Search Bible</title>
+        <meta name="viewport" content="width=device-width" />
+        <meta name="description" content="Search the Bible quickly and easily"/>
       </Head>
       <Component {...pageProps} />
     </>

@@ -1,4 +1,4 @@
-import { FaSearch } from 'react-icons/fa';
+import { IoSearchSharp } from 'react-icons/io5';
 
 const Form = ({ handleSubmit, onSubmit, register }) => (
   <form className="w-full allCenter relative" onSubmit={handleSubmit(onSubmit)}>
@@ -12,7 +12,7 @@ const Form = ({ handleSubmit, onSubmit, register }) => (
       type="submit"
       className="absolute right-1.5 h-7 w-7 rounded allCenter focus:outline-none"
     >
-      <FaSearch />
+      <IoSearchSharp />
     </button>
   </form>
 );

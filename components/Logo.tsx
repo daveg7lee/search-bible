@@ -7,7 +7,7 @@ const Logo = () => {
     router.reload();
   };
   return (
-    <div className="w-8 hidden md:block cursor-pointer" onClick={reload}>
+    <div className="w-8 cursor-pointer h-full allCenter" onClick={reload}>
       <Image src="/bible.png" alt="bible" width={35} height={35} />
     </div>
   );
