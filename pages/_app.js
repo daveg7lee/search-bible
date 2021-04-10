@@ -1,6 +1,7 @@
 import '../styles/globals.css';
+import 'react-toastify/dist/ReactToastify.css';
 import Head from 'next/head';
-import { useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -17,7 +18,18 @@ function MyApp({ Component, pageProps }) {
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
         />
       </Head>
+
       <Component {...pageProps} />
+      <ToastContainer
+        position="top-right"
+        autoClose={8000}
+        hideProgressBar={true}
+        newestOnTop={true}
+        draggable={true}
+        pauseOnVisibilityChange
+        closeOnClick
+        pauseOnHover
+      />
     </>
   );
 }

@@ -9,7 +9,9 @@ import Bible from '../components/Bible';
 import Button from '../components/Button';
 import Header from '../components/Header';
 import toEnglish from '../utils/toEnglish';
+import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
+import sleep from 'await-sleep';
 
 const App = () => {
   const router = useRouter();
@@ -57,6 +59,8 @@ const App = () => {
       setVerses(splitedVerses);
       setBook(engBook);
     } catch (e) {
+      toast.error('Invalid Syntax');
+      await sleep(2000);
       router.reload();
     }
   };
@@ -80,11 +84,11 @@ const App = () => {
           {HTML ? (
             <>
               <Bible html={HTML} />
-              <Button changeVersion={changeVersion} version={version} />
             </>
           ) : (
             <Welcome />
           )}
+          <Button changeVersion={changeVersion} version={version} />
         </div>
       )}
     </div>

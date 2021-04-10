@@ -15,7 +15,7 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"
           />
-          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta name="keywords" content="bible, search" />
           <link rel="manifest" href="/manifest.json" />
           <link

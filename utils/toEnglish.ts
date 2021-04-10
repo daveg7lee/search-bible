@@ -1,14 +1,18 @@
+import { toast } from 'react-toastify';
+import AbbreviationTable from '../public/AbbreviationTable';
 import bibleTable from '../public/bibleTable';
-import Abbreviation from './Abbreviation';
 
 const toEnglish = (value: string) => {
-  let book = value;
-  if (book in bibleTable) {
-    book = value;
+  const values = Object.values(bibleTable);
+  if (values.includes(value)) {
+    return value;
+  } else if (value in AbbreviationTable) {
+    return bibleTable[AbbreviationTable[value]];
+  } else if (value in bibleTable) {
+    return bibleTable[value];
   } else {
-    book = Abbreviation(book);
+    toast.error('Invalid Syntax');
   }
-  return bibleTable[book];
 };
 
 export default toEnglish;
