@@ -16,7 +16,7 @@ class MyDocument extends Document {
             href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"
           />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-          <meta name="keywords" content="bible, search" />
+          <meta name="keywords" content="bible, search, 성경, 검색" />
           <link rel="manifest" href="/manifest.json" />
           <link
             href="/favicon-16x16.png"
