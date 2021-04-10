@@ -11,6 +11,10 @@ class MyDocument extends Document {
           />
           <meta charSet="utf-8" />
           <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+          <link
+            rel="stylesheet"
+            href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"
+          />
         </Head>
         <body>
           <Main />

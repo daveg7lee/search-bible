@@ -1,5 +1,3 @@
-import { IoSearchSharp } from 'react-icons/io5';
-
 const Form = ({ handleSubmit, onSubmit, register }) => (
   <form className="w-full allCenter relative" onSubmit={handleSubmit(onSubmit)}>
     <input
@@ -10,9 +8,9 @@ const Form = ({ handleSubmit, onSubmit, register }) => (
     />
     <button
       type="submit"
-      className="absolute right-1.5 h-7 w-7 rounded allCenter focus:outline-none"
+      className="absolute right-1.5 h-7 w-7 rounded allCenter focus:outline-none block lg:hidden"
     >
-      <IoSearchSharp name="Search-icon" />
+      <i className="xi-search xi-x"></i>
     </button>
   </form>
 );
