@@ -1,5 +1,5 @@
 const Welcome = () => (
-  <div className="flex items-center flex-col h-full">
+  <div className="allCenter flex-col h-full">
     <h1 className="text-3xl font-semibold py-8 text-center">
       Welcome to Search Bible
     </h1>
