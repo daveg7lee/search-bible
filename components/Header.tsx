@@ -3,7 +3,7 @@ import Form from './Form';
 import Logo from './Logo';
 
 const Header = ({ handleSubmit, onSubmit, register, setDark, dark }) => (
-  <div className="header">
+  <header className="header">
     <div className="h-full hidden md:block">
       <Logo />
     </div>
@@ -17,7 +17,7 @@ const Header = ({ handleSubmit, onSubmit, register, setDark, dark }) => (
     <div className="h-full hidden md:block">
       <DarkModeBtn setDark={setDark} dark={dark} />
     </div>
-  </div>
+  </header>
 );
 
 export default Header;
