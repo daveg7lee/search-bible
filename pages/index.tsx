@@ -1,36 +1,38 @@
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import axios from 'axios';
+import sleep from 'await-sleep';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 import Loading from '../components/Loading';
-import { KOR, NIV } from '../public/globalVar';
 import Welcome from '../components/Welcome';
 import Bible from '../components/Bible';
 import Button from '../components/Button';
 import Header from '../components/Header';
 import toEnglish from '../utils/toEnglish';
-import { toast } from 'react-toastify';
-import { useRouter } from 'next/router';
-import sleep from 'await-sleep';
+import darkModeStore from '../stores/darkModeStore';
+import versionStore from '../stores/versionStore';
 
 const App = () => {
   const router = useRouter();
-  const { register, handleSubmit } = useForm();
   const [loading, setLoading] = useState(false);
-  const [version, setVersion] = useState(KOR);
+  const [version, setVersion] = useState(versionStore.getState());
   const [HTML, setHTML] = useState(null);
   const [book, setBook] = useState('');
   const [verses, setVerses] = useState('');
-  const [dark, setDark] = useState(true);
-  // useEffect for dark mode
-  useEffect(() => {
+  darkModeStore.subscribe(() => {
+    const isDark = darkModeStore.getState();
     const html = document.querySelector('html');
-    if (dark) {
+    if (isDark) {
       html.className = 'dark';
     } else {
       html.className = '';
     }
-  }, [dark]);
+  });
+  versionStore.subscribe(() => {
+    setVersion(versionStore.getState());
+  });
   // useEffect for edit HTML
   useEffect(() => {
     const editHTML = async () => {
@@ -42,7 +44,7 @@ const App = () => {
       setLoading(false);
       setHTML(html);
     };
-    if (book && verses && verses) {
+    if (book && verses && version) {
       setLoading(true);
       editHTML();
     }
@@ -64,31 +66,15 @@ const App = () => {
       router.reload();
     }
   };
-  // change bible version
-  const changeVersion = async () => {
-    version === KOR ? setVersion(NIV) : setVersion(KOR);
-  };
   return (
     <div className="allCenter flex-col h-screen">
-      <Header
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        register={register}
-        setDark={setDark}
-        dark={dark}
-      />
+      <Header onSubmit={onSubmit} />
       {loading ? (
         <Loading />
       ) : (
         <div className="h-full w-full bg-bgColor dark:bg-darkBgColor p-6 relative overflow-y-auto">
-          {HTML ? (
-            <>
-              <Bible html={HTML} />
-            </>
-          ) : (
-            <Welcome />
-          )}
-          <Button changeVersion={changeVersion} version={version} />
+          {HTML ? <Bible html={HTML} /> : <Welcome />}
+          <Button />
         </div>
       )}
     </div>
