@@ -1,6 +1,30 @@
 import { useForm } from 'react-hook-form';
+import { setLoading } from '../stores/loadingStore';
+import verseStore, { setVerse } from '../stores/verseStore';
+import bookStore, { setBook } from '../stores/bookStore';
+import toEnglish from '../utils/toEnglish';
+import { toast } from 'react-toastify';
+import sleep from 'await-sleep';
+import { useRouter } from 'next/router';
 
-const Form = ({ onSubmit }) => {
+const Form = () => {
+  const router = useRouter();
+  const onSubmit = async (data) => {
+    setLoading();
+    try {
+      const { value } = data;
+      const splitedValue = value.split(' ');
+      const koBook = splitedValue[0];
+      const splitedVerses = splitedValue[1].replace(':', '%3A');
+      const engBook = toEnglish(koBook);
+      verseStore.dispatch(setVerse(splitedVerses));
+      bookStore.dispatch(setBook(engBook));
+    } catch (e) {
+      toast.error('Invalid Syntax');
+      await sleep(2000);
+      router.reload();
+    }
+  };
   const { register, handleSubmit } = useForm();
   return (
     <form
