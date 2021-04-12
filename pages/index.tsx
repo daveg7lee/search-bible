@@ -18,12 +18,13 @@ const App = () => {
   const [book, setBook] = useState('');
   const [verses, setVerses] = useState('');
   bookStore.subscribe(() => {
-    const state = bookStore.getState();
-    setBook(state);
+    setBook(bookStore.getState());
   });
   verseStore.subscribe(() => {
-    const state = verseStore.getState();
-    setVerses(state);
+    setVerses(verseStore.getState());
+  });
+  versionStore.subscribe(() => {
+    setVersion(versionStore.getState());
   });
   darkModeStore.subscribe(() => {
     const isDark = darkModeStore.getState();
@@ -33,9 +34,6 @@ const App = () => {
     } else {
       html.className = '';
     }
-  });
-  versionStore.subscribe(() => {
-    setVersion(versionStore.getState());
   });
   // useEffect for edit HTML
   useEffect(() => {

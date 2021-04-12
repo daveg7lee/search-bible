@@ -1,16 +1,16 @@
 import { useForm } from 'react-hook-form';
-import { setLoading } from '../stores/loadingStore';
 import verseStore, { setVerse } from '../stores/verseStore';
 import bookStore, { setBook } from '../stores/bookStore';
 import toEnglish from '../utils/toEnglish';
 import { toast } from 'react-toastify';
 import sleep from 'await-sleep';
 import { useRouter } from 'next/router';
+import loadingStore, { changeMode } from '../stores/loadingStore';
 
 const Form = () => {
   const router = useRouter();
   const onSubmit = async (data) => {
-    setLoading();
+    loadingStore.dispatch(changeMode());
     try {
       const { value } = data;
       const splitedValue = value.split(' ');

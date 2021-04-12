@@ -8,7 +8,7 @@ const DarkModeBtn = () => {
     setIsDark(darkModeStore.getState());
   });
   const toggleDarkMode = () => {
-    darkModeStore.dispatch(changeMode(!isDark));
+    darkModeStore.dispatch(changeMode());
   };
   return (
     <button className="darkMode allCenter">
