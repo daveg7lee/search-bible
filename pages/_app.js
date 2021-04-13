@@ -10,12 +10,7 @@ function MyApp({ Component, pageProps }) {
         <title>Search Bible</title>
         <meta name="viewport" content="width=device-width" />
         <meta name="description" content="쉽고 빠른 성경 검색" />
-        <meta
-          name="viewport"
-          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
-        />
       </Head>
-
       <Component {...pageProps} />
       <ToastContainer
         position="top-right"

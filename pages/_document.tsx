@@ -13,7 +13,6 @@ class MyDocument extends Document {
             name="naver-site-verification"
             content="5f080a6a87e488f6a0f4d8111d0e334154930c5e"
           />
-          <meta charSet="utf-8" />
           <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
           <link
             rel="stylesheet"
