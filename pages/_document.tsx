@@ -18,6 +18,8 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"
           />
+          <meta property="og:title" content="Search Bible" />
+          <meta property="og:description" content="쉽고 빠른 성경 검색" />
           <meta name="keywords" content="bible, search, 성경, 검색" />
           <link rel="manifest" href="/manifest.json" />
           <link
