@@ -10,6 +10,7 @@ class MyDocument extends Document {
           <meta name="content-language" content="en" />
           <meta http-equiv="content-type" content="text/html; charset=kr" />
           <meta http-equiv="content-type" content="text/html; charset=en" />
+          <meta charSet="utf-8" />
           <meta
             name="google-site-verification"
             content="ljN2MsEuFIaVZgS0RCKF-iufd7Wn6vVp_ygDmB87VRI"
