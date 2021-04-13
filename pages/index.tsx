@@ -13,8 +13,8 @@ import verseStore from '../stores/verseStore';
 
 const App = () => {
   const [loading, setLoading] = useState(false);
-  const [version, setVersion] = useState(versionStore.getState());
   const [HTML, setHTML] = useState(null);
+  const [version, setVersion] = useState(versionStore.getState());
   const [book, setBook] = useState('');
   const [verses, setVerses] = useState('');
   bookStore.subscribe(() => {
