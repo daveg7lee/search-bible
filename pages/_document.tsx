@@ -6,6 +6,9 @@ class MyDocument extends Document {
       <Html className="dark" lang="ko">
         <Head>
           <meta name="author" content="Ki Hyun Lee" />
+          <meta name="content-language" content="kr" />
+          <meta name="content-language" content="en" />
+
           <meta
             name="google-site-verification"
             content="ljN2MsEuFIaVZgS0RCKF-iufd7Wn6vVp_ygDmB87VRI"
