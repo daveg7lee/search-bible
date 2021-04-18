@@ -2,7 +2,7 @@
 
 Website for easy Bible search with Next.JS
 
-##Project Tree
+## Project Tree
 ```
 📦 search-bible
 ├─ .gitignore
