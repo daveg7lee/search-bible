@@ -1,66 +1,58 @@
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import Loading from '../components/Loading';
-import Welcome from '../components/Welcome';
-import Bible from '../components/Bible';
-import Button from '../components/Button';
-import Header from '../components/Header';
-import darkModeStore from '../stores/darkModeStore';
-import versionStore from '../stores/versionStore';
-import bookStore from '../stores/bookStore';
-import verseStore from '../stores/verseStore';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import { useEffect, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import Loading from "../components/Loading";
+import Welcome from "../components/Welcome";
+import Bible from "../components/Bible";
+import Header from "../components/Header";
+import darkModeStore from "../stores/darkModeStore";
+import bookStore from "../stores/bookStore";
+import verseStore from "../stores/verseStore";
+import { getBible } from "../api";
 
 const App = () => {
-  const [loading, setLoading] = useState(false);
-  const [HTML, setHTML] = useState(null);
-  const [version, setVersion] = useState(versionStore.getState());
-  const [book, setBook] = useState('');
-  const [verses, setVerses] = useState('');
+  const [data, setData] = useState(null);
+  const mutation = useMutation(getBible, {
+    onSuccess: (res) => {
+      setData(res);
+    },
+  });
+  const [book, setBook] = useState("");
+  const [verses, setVerses] = useState("");
   bookStore.subscribe(() => {
     setBook(bookStore.getState());
   });
   verseStore.subscribe(() => {
     setVerses(verseStore.getState());
   });
-  versionStore.subscribe(() => {
-    setVersion(versionStore.getState());
-  });
   darkModeStore.subscribe(() => {
     const isDark = darkModeStore.getState();
-    const html = document.querySelector('html');
+    const html = document.querySelector("html");
     if (isDark) {
-      html.className = 'dark';
+      html.className = "dark";
     } else {
-      html.className = '';
+      html.className = "";
     }
   });
-  // useEffect for edit HTML
+
   useEffect(() => {
-    const editHTML = async () => {
-      const {
-        data: { html },
-      } = await axios(
-        `api/getHTML?version=${version}&book=${book}&verses=${verses}`
-      );
-      setLoading(false);
-      setHTML(html);
-    };
-    if (book && verses && version) {
-      setLoading(true);
-      editHTML();
+    if (book && verses) {
+      mutation.mutate({
+        doc: book,
+        lang: "kor",
+        start: verses.split("-")[0],
+        end: verses.split("-")[1] ? verses.split("-")[1] : verses.split("-")[0],
+      });
     }
-  }, [book, verses, version]);
-  // get data and change verses and book to edit HTML
+  }, [book, verses]);
   return (
     <div className="allCenter flex-col h-screen">
       <Header />
-      {loading ? (
+      {mutation.isLoading ? (
         <Loading />
       ) : (
         <div className="h-full w-full bg-bgColor dark:bg-darkBgColor p-6 relative overflow-y-auto">
-          {HTML ? <Bible html={HTML} /> : <Welcome />}
-          <Button />
+          {data ? <Bible data={data} /> : <Welcome />}
         </div>
       )}
     </div>

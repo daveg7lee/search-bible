@@ -1,11 +1,14 @@
-import '../styles/globals.css';
-import 'react-toastify/dist/ReactToastify.css';
-import Head from 'next/head';
-import { ToastContainer } from 'react-toastify';
+import "../styles/globals.css";
+import "react-toastify/dist/ReactToastify.css";
+import Head from "next/head";
+import { ToastContainer } from "react-toastify";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
 function MyApp({ Component, pageProps }) {
+  const client = new QueryClient();
+
   return (
-    <>
+    <QueryClientProvider client={client}>
       <Head>
         <title>Search Bible</title>
         <meta name="viewport" content="width=device-width" />
@@ -18,11 +21,10 @@ function MyApp({ Component, pageProps }) {
         hideProgressBar={true}
         newestOnTop={true}
         draggable={true}
-        pauseOnVisibilityChange
         closeOnClick
         pauseOnHover
       />
-    </>
+    </QueryClientProvider>
   );
 }
 
